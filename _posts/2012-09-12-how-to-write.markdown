@@ -1,8 +1,10 @@
 ---
 layout: post
-title: Hello World
-tags: [blog]
-image: '/images/posts/1.jpg'
+title:  "Welcome to Jekyll!"
 ---
 
-I'm hosted with GitHub Pages.
+# Welcome
+
+**Hello world**, this is my first Jekyll blog post.
+
+I hope you like it!
