@@ -15,6 +15,7 @@ twitter:     ''
 github:      ''
 instagram:   ''
 facebook:    ''
+telegram:    'https://alexey-sharonov.github.io'
 
 markdown:  kramdown
 permalink: pretty
