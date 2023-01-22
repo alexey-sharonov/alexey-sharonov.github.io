@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Hello World
-tags: []
+tags: [blog]
 image: '/images/posts/1.jpg'
 ---
 # Hello World
