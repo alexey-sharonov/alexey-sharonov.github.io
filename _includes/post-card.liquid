@@ -11,7 +11,7 @@
       {{ post.content | strip_html | truncatewords:35 }}
     </p>
 
-    <span class='c-post-card__date'>{{% include date.html date=page.date %}}</span>
+    <span class='c-post-card__date'>{{ post.date | date: '%d %b %Y' }}</span>
   </a>
 
 </div>
