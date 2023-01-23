@@ -14,11 +14,12 @@ layout: default
       <article class='c-post' itemscope itemtype='http://schema.org/BlogPosting'>
 
         <h1 class='c-post__title u-text-center'>{{ page.title }}</h1>
+        
+        {% include date.html date=page.date %}
 
         <time class='c-post__date' datetime='{{ page.date | date_to_xmlschema }}' itemprop='datePublished'>{{ page.date | date: '%d %b %Y' }}</time>
 
-        {% include date.html date=page.date %}
-        
+
         <div class='c-content' itemprop='articleBody'>
           {% include page-image.html %}
 
