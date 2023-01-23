@@ -15,9 +15,8 @@ layout: default
 
         <h1 class='c-post__title u-text-center'>{{ page.title }}</h1>
         
-        {% include date.html date=page.date %}
 
-        <time class='c-post__date' datetime='{{ page.date | date_to_xmlschema }}' itemprop='datePublished'>{{ page.date | date: '%d %b %Y' }}</time>
+        <time class='c-post__date' datetime='{{ page.date | date_to_xmlschema }}' itemprop='datePublished'>{{% include date.html date=page.date %} { page.date | date: '%d %b %Y' }}</time>
 
 
         <div class='c-content' itemprop='articleBody'>
