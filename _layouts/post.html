@@ -17,6 +17,8 @@ layout: default
 
         <time class='c-post__date' datetime='{{ page.date | date_to_xmlschema }}' itemprop='datePublished'>{{ page.date | date: '%d %b %Y' }}</time>
 
+        {% include date.html date=page.date %}
+        
         <div class='c-content' itemprop='articleBody'>
           {% include page-image.html %}
 
