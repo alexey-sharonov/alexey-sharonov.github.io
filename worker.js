@@ -1,5 +1,5 @@
 // worker.js
-importScripts('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js');
+importScripts('transformers.min.js');
 
 // Уведомления в основной поток
 function postStatus(msg) {
