@@ -14,7 +14,7 @@ async function loadModel() {
 
   try {
     // Используем pipeline для text-generation
-    generator = await pipeline('text-generation', 'Xenova/Qwen2.5-1.5B-Instruct', {
+    generator = await pipeline('text-generation', 'Xenova/distilgpt2', {
       // Форсируем WebGPU, если доступен, иначе Wasm
       device: 'webgpu',
       // Используем 4-битное квантование для экономии памяти
