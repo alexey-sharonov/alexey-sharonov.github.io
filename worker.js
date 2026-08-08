@@ -1,25 +1,18 @@
-// worker.js
-importScripts('transformers.min.js');
+// worker.js (ES-модуль)
+import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js';
 
-// Уведомления в основной поток
 function postStatus(msg) {
   self.postMessage({ type: 'status', data: msg });
 }
 
 let generator = null;
 
-// Загрузка модели
 async function loadModel() {
   postStatus('Загрузка модели Qwen2.5-1.5B (ожидайте, ~1.5 ГБ)...');
-
   try {
-    // Используем pipeline для text-generation
-    generator = await pipeline('text-generation', 'Xenova/distilgpt2', {
-      // Форсируем WebGPU, если доступен, иначе Wasm
+    generator = await pipeline('text-generation', 'Xenova/Qwen2.5-1.5B-Instruct', {
       device: 'webgpu',
-      // Используем 4-битное квантование для экономии памяти
       dtype: 'q4f16',
-      // Показываем прогресс загрузки
       progress_callback: (progress) => {
         if (progress.status === 'downloading') {
           const pct = ((progress.loaded / progress.total) * 100).toFixed(1);
@@ -35,21 +28,17 @@ async function loadModel() {
   }
 }
 
-// Генерация ответа
 async function generate(prompt) {
   if (!generator) {
     self.postMessage({ type: 'error', data: 'Модель ещё не загружена' });
     return;
   }
-
   try {
     const result = await generator(prompt, {
       max_new_tokens: 256,
       temperature: 0.7,
       top_p: 0.9,
-      // Колбэк для потоковой выдачи токенов
       callback_function: (tokens) => {
-        // tokens - массив сгенерированных токенов; берём последний
         const latest = tokens[tokens.length - 1];
         self.postMessage({ type: 'token', data: latest });
       }
@@ -60,12 +49,8 @@ async function generate(prompt) {
   }
 }
 
-// Обработка сообщений от основного потока
 self.onmessage = (e) => {
   const { type, prompt } = e.data;
-  if (type === 'load') {
-    loadModel();
-  } else if (type === 'generate') {
-    generate(prompt);
-  }
+  if (type === 'load') loadModel();
+  else if (type === 'generate') generate(prompt);
 };

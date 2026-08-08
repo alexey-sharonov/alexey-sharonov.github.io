@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // Создаём воркер
-const worker = new Worker('worker.js');
+const worker = new Worker('worker.js', { type: 'module' });
 
 // Получаем сообщения от воркера
 worker.onmessage = (e) => {
